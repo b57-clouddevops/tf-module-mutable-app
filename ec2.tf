@@ -8,10 +8,6 @@ resource "aws_spot_instance_request" "spot" {
   vpc_security_group_ids    = [aws_security_group.allows_app.id]
   wait_for_fulfillment      = true   # aws waits for 10 mins to provision ( only in case if aws experiences resource limitation  )
   iam_instance_profile      = "b57-admin"
-
-  tags = {
-    Name = "roboshop-${var.ENV}-rabbitmq"
-  }
 }
 
 # Creates OD Instances
@@ -24,9 +20,12 @@ resource "aws_instance" "od" {
   vpc_security_group_ids    = [aws_security_group.allows_app.id]
   iam_instance_profile      = "b57-admin"
 
-
-  tags = {
-    Name = "roboshop-${var.ENV}-rabbitmq"
-  }
 }
 
+resource "aws_ec2_tag" "app_tags" {
+  count       = local.INSTANCE_COUNT
+   
+  resource_id = element(local.INSTANCE_IDS, count.index)
+  key         = "Name"
+  value       = "roboshop-${var.ENV}-${var.COMPONENT}"
+}
