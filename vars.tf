@@ -1,7 +1,7 @@
 variable "INTERNAL" {}
 variable "APP_PORT" {}
 variable "ENV" {}
-
+variable "COMPONENT" {}
 
 # Spot Variables
 variable "SPOT_INSTANCE_COUNT" {}
