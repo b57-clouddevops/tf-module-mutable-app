@@ -1,6 +1,6 @@
 resource "aws_security_group" "allows_app" {
-  name                    = "roboshop-${COMPONENT}-${var.ENV}"
-  description             = "roboshop-${COMPONENT}-${var.ENV}"
+  name                    = "roboshop-${var.COMPONENT}-${var.ENV}"
+  description             = "roboshop-${var.COMPONENT}-${var.ENV}"
   vpc_id                  = data.terraform_remote_state.vpc.outputs.VPC_ID
 
   ingress {
@@ -28,6 +28,6 @@ resource "aws_security_group" "allows_app" {
   }
 
   tags = {
-    Name = "roboshop-${COMPONENT}-${var.ENV}"
+    Name = "roboshop-${var.COMPONENT}-${var.ENV}"
   }
 }
