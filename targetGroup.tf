@@ -1,6 +1,6 @@
 locals {
     INSTANCE_COUNT = var.OD_INSTANCE_COUNT + var.SPOT_INSTANCE_COUNT
-    INSTANCE_IDS   = concat(aws_spot_instance_request.spot.*.id , aws_instance.app.*.id)
+    INSTANCE_IDS   = concat(aws_spot_instance_request.spot.*.id , aws_instance.od.*.id)
 }
 
 
