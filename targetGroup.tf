@@ -1,5 +1,6 @@
 locals {
     INSTANCE_COUNT = var.OD_INSTANCE_COUNT + var.SPOT_INSTANCE_COUNT
+    INSTANCE_IDS   = concat(aws_spot_instance_request.spot.*.id , aws_instance.app.*.id)
 }
 
 
@@ -15,7 +16,7 @@ resource "aws_lb_target_group" "app" {
 resource "aws_lb_target_group_attachment" "attach_instances" {
   count            = local.INSTANCE_COUNT
 
-  target_group_arn = aws_lb_target_group.test.arn
-  target_id        = aws_instance.test.id
-  port             = 80
+  target_group_arn = aws_lb_target_group.app.arn
+  target_id        = element(local.INSTANCE_IDS, count.index)
+  port             = var.APP_PORT
 }
