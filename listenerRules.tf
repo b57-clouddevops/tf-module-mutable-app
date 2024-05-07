@@ -24,7 +24,7 @@ resource "aws_lb_listener_rule" "prv_app_rule" {
 }
 
 #  public Listener Rule
-resource "aws_lb_listener_rule" "prv_app_rule" {
+resource "aws_lb_listener_rule" "pub_app_rule" {
   count        = var.INTERNAL  ? 0 : 1 
   listener_arn = data.terraform_remote_state.alb.outputs.PUBLIC_LISTENER_ARN
   priority     = random_integer.priority.result
