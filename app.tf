@@ -1,6 +1,10 @@
 resource "null_resource"  "app_deploy" {
     count   = local.INSTANCE_COUNT
 
+    triggers = {
+        always_run = timestamp()            # This ensure that this provisioner would be triggering all the time
+    }
+
     connection {
     type     = "ssh"
     user     = "centos"
@@ -14,3 +18,6 @@ resource "null_resource"  "app_deploy" {
     ]
   }
 }
+
+# Provisioners are run-time by default : That means they only during the creation of the resources. 
+# Once the infra is provisioned, from then it's not going to be executed.
