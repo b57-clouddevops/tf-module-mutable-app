@@ -14,3 +14,13 @@ data "aws_ami" "ami" {
   name_regex       = "centos8-with-ansible"     # Give the AMI ID of the AMI Created with Ansible Installed ( Use the base image as centos-8 lab image )
   owners           = ["355449129696"]           # give your aws account number 
 }
+
+# datasource that reads the info from alb statefile 
+data "terraform_remote_state" "alb" {
+  backend = "s3"
+  config = {
+    bucket = "b57-tf-state-bucket"
+    key    = "dev/alb/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
