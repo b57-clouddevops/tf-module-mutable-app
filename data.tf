@@ -24,3 +24,14 @@ data "terraform_remote_state" "alb" {
     region = "us-east-1"
   }
 }
+
+
+# datasource that reads the info from DB statefile 
+data "terraform_remote_state" "db" {
+  backend = "s3"
+  config = {
+    bucket = "b57-tf-state-bucket"
+    key    = "dev/db/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
