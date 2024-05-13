@@ -13,7 +13,7 @@ resource "aws_lb_listener_rule" "prv_app_rule" {
 
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.app.arn
+    target_group_arn = aws_lb_target_group.apps.arn
   }
 
   condition {
@@ -31,7 +31,7 @@ resource "aws_lb_listener_rule" "pub_app_rule" {
 
   action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.app.arn
+    target_group_arn = aws_lb_target_group.apps.arn
   }
 
   condition {
